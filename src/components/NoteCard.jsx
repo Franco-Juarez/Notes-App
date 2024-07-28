@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState, useRef, useContext } from "react";
-import { autoGrow, bodyParser, setNewOffset, setZindex } from "../utils/utils";
+import { bodyParser, setNewOffset, setZindex } from "../utils/utils";
 import { db } from "../appwrite/databases";
 import DeleteButton from "./DeleteButton";
 import { NoteContext } from "../context/NoteContext";
@@ -17,7 +17,6 @@ const NoteCard = ({ note }) => {
   const cardRef = useRef(null);
   let mouseStartPos = { x: 0, y: 0 };
   useEffect(() => {
-    autoGrow(textAreaRef);
     setZindex(cardRef.current);
   }, []);
 
@@ -102,9 +101,6 @@ const NoteCard = ({ note }) => {
       <div className="card-body">
         <textarea
           onKeyUp={handleKeyUp}
-          onInput={() => {
-            autoGrow(textAreaRef);
-          }}
           onFocus={() => {
             setZindex(cardRef.current);
             setSelectedNote(note);
